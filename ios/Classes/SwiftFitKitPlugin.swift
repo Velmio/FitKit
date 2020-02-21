@@ -197,9 +197,20 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
                                             
                                             print("Time: \(result.startDate), \(result.sumQuantity()?.doubleValue(for: HKUnit.count()) ?? 0)")
                                             
+                                            var value: Double
+                                            
+                                            switch (request.aggregationOption) {
+                                            case "cumulativeSum":
+                                                value = result.sumQuantity()?.doubleValue(for: request.unit) ?? 0;
+                                            case "discreteAverage":
+                                                value = result.averageQuantity()?.doubleValue(for: request.unit) ?? 0;
+                                            default:
+                                                value = 0
+                                            }
+                                            
                                             let sample: NSDictionary =  [
-                                                "value": result.sumQuantity()?.doubleValue(for: request.unit) ?? 0,
-                                                "date_from": Int(result.startDate.timeIntervalSince1970 * 1000),
+                                                "value": value,
+                                                "date_from" : Int(result.startDate.timeIntervalSince1970 * 1000),
                                                 "date_to": Int(result.endDate.timeIntervalSince1970 * 1000),
                                                 "source": "Collection Query",
                                                 "user_entered": false

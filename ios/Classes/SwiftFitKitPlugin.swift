@@ -216,7 +216,10 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
                                                 "user_entered": false
                                             ]
                                             
-                                            output.append(sample)
+                                            if (value != 0) {
+                                                output.append(sample)
+                                            }
+                                            
             })
             
             result(output)

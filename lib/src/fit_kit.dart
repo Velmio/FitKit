@@ -43,9 +43,42 @@ class FitKit {
     );
   }
 
+  static Future<List<FitData>> computeCollectionQuery(
+      DataType type,
+      {
+      DateTime dateFrom,
+      DateTime dateTo,
+      int limit,
+      CollectionOptions aggregationOption,
+      int interval
+      }) async {
+
+      return await _channel.invokeListMethod('computeCollectionQuery', {
+      "type": _dataTypeToString(type),
+      "date_from": dateFrom?.millisecondsSinceEpoch ?? 1,
+      "date_to": (dateTo ?? DateTime.now()).millisecondsSinceEpoch,
+      "limit": limit,
+      "aggregationOption": _optionTypeToString(aggregationOption) ?? _optionTypeToString(CollectionOptions.CUMULATIVE_SUM),
+      "interval": interval
+    }).then(
+      (response) => response.map((item) => FitData.fromJson(item)).toList(),
+    );
+  
+  }
+
   static Future<FitData> readLast(DataType type) async {
     return await read(type, limit: 1)
         .then((results) => results.isEmpty ? null : results[0]);
+  }
+
+  static String _optionTypeToString(CollectionOptions option){
+    switch (option){
+      case CollectionOptions.CUMULATIVE_SUM:
+        return "cumulativeSum";
+      case CollectionOptions.DISCRETE_AVERAGE:
+        return "discreteAverage";
+    }
+    throw Exception('CollectionOptions $option not supported');
   }
 
   static String _dataTypeToString(DataType type) {
@@ -98,4 +131,9 @@ enum DataType {
   SLEEP,
   STAND_TIME,
   EXERCISE_TIME
+}
+
+enum CollectionOptions {
+  CUMULATIVE_SUM,
+  DISCRETE_AVERAGE
 }

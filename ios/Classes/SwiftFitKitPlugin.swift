@@ -194,9 +194,7 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
             
             results?.enumerateStatistics(from: request.dateFrom,
                                          to: request.dateTo, with: { (result, stop) in
-                                            
-                                            print("Time: \(result.startDate), \(result.sumQuantity()?.doubleValue(for: HKUnit.count()) ?? 0)")
-                                            
+                                                                                        
                                             var value: Double
                                             
                                             switch (request.aggregationOption) {
@@ -205,7 +203,7 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
                                             case "discreteAverage":
                                                 value = result.averageQuantity()?.doubleValue(for: request.unit) ?? 0;
                                             default:
-                                                value = 0
+                                                value = -1
                                             }
                                             
                                             let sample: NSDictionary =  [

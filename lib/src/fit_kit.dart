@@ -45,18 +45,20 @@ class FitKit {
 
   static Future<List<FitData>> computeCollectionQuery(
       DataType type,
+      {
       DateTime dateFrom,
       DateTime dateTo,
       int limit,
       CollectionOptions aggregationOption,
-      int interval) async {
+      int interval
+      }) async {
 
       return await _channel.invokeListMethod('computeCollectionQuery', {
       "type": _dataTypeToString(type),
       "date_from": dateFrom?.millisecondsSinceEpoch ?? 1,
       "date_to": (dateTo ?? DateTime.now()).millisecondsSinceEpoch,
       "limit": limit,
-      "aggregationOption": _optionTypeToString(aggregationOption),
+      "aggregationOption": _optionTypeToString(aggregationOption) ?? _optionTypeToString(CollectionOptions.CUMULATIVE_SUM),
       "interval": interval
     }).then(
       (response) => response.map((item) => FitData.fromJson(item)).toList(),

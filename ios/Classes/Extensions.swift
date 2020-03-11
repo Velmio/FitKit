@@ -70,6 +70,12 @@ extension HKSampleType {
                 }
             case "sleep":
                 return HKSampleType.categoryType(forIdentifier: .sleepAnalysis)
+            case "carbohydrates":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryCarbohydrates)
+            case "protein":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryProtein)
+            case "total_fat":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryFatTotal)
             default:
                 return nil
             }
@@ -106,6 +112,12 @@ extension HKUnit {
                 return HKUnit.kilocalorie()
             case "water":
                 return HKUnit.liter()
+            case "carbohydrates":
+                return HKUnit.gram()
+            case "protein":
+                return HKUnit.gram()
+            case "total_fat":
+                return HKUnit.gram()
             case "sleep":
                 return HKUnit.minute() // this is ignored
             case "stand_time":

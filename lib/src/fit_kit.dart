@@ -107,6 +107,12 @@ class FitKit {
         return "water";
       case DataType.SLEEP:
         return "sleep";
+      case DataType.CARBOHYDRATES:
+        return "carbohydrates";
+      case DataType.PROTEIN:
+        return "protein";
+      case DataType.TOTAL_FAT:
+        return "total_fat";
       case DataType.STAND_TIME:
         return "stand_time";
       case DataType.EXERCISE_TIME:
@@ -128,9 +134,12 @@ enum DataType {
   DISTANCE,
   ENERGY,
   WATER,
+  CARBOHYDRATES,
+  PROTEIN,
+  TOTAL_FAT,
   SLEEP,
   STAND_TIME,
-  EXERCISE_TIME
+  EXERCISE_TIME,
 }
 
 enum CollectionOptions {

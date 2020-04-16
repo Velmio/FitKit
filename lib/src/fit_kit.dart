@@ -108,11 +108,11 @@ class FitKit {
       case DataType.SLEEP:
         return "sleep";
       case DataType.CARBOHYDRATE:
-        return "carbohydrates";
+        return "Carbohydrate";
       case DataType.PROTEIN:
-        return "protein";
+        return "Protein";
       case DataType.FAT:
-        return "total_fat";
+        return "Fat";
       case DataType.STAND_TIME:
         return "stand_time";
       case DataType.EXERCISE_TIME:

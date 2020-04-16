@@ -107,16 +107,38 @@ class FitKit {
         return "water";
       case DataType.SLEEP:
         return "sleep";
-      case DataType.CARBOHYDRATES:
+      case DataType.CARBOHYDRATE:
         return "carbohydrates";
       case DataType.PROTEIN:
         return "protein";
-      case DataType.TOTAL_FAT:
+      case DataType.FAT:
         return "total_fat";
       case DataType.STAND_TIME:
         return "stand_time";
       case DataType.EXERCISE_TIME:
         return "exercise_time";
+      case DataType.SATURATED_FAT:
+        return "Saturated fat";
+      case DataType.CHOLESTEROL:
+        return "Cholesterol";
+      case DataType.FIBER:
+        return "Fiber";
+      case DataType.SUGAR:
+        return "Sugar";
+      case DataType.CALCIUM:
+        return "Calcium, Ca";
+      case DataType.IRON:
+        return "Iron, Fe";
+      case DataType.POTASSIUM:
+        return "Potassium, K";
+      case DataType.SODIUM:
+        return "Sodium, Na";
+      case DataType.VITAMIN_A:
+        return "Vitamin A";
+      case DataType.VITAMIN_D:
+        return "Vitamin D";
+      case DataType.VITAMIN_C:
+        return "Vitamin C";
     }
     throw Exception('dataType $type not supported');
   }
@@ -134,12 +156,24 @@ enum DataType {
   DISTANCE,
   ENERGY,
   WATER,
-  CARBOHYDRATES,
-  PROTEIN,
-  TOTAL_FAT,
   SLEEP,
   STAND_TIME,
   EXERCISE_TIME,
+  CARBOHYDRATE,
+  PROTEIN,
+  FAT,
+  SATURATED_FAT,
+  CHOLESTEROL,
+  FIBER,
+  SUGAR,
+  CALCIUM,
+  IRON,
+  POTASSIUM,
+  SODIUM,
+  VITAMIN_A,
+  VITAMIN_D,
+  VITAMIN_C
+
 }
 
 enum CollectionOptions {

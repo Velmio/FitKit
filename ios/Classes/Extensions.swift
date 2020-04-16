@@ -133,7 +133,7 @@ extension HKUnit {
                 return HKUnit.gramUnit(with: .kilo)
             case "distance":
                 return HKUnit.meter()
-            case "energy":
+            case "Energy":
                 return HKUnit.kilocalorie()
             case "Water":
                 return HKUnit.liter()
@@ -150,8 +150,6 @@ extension HKUnit {
                 return HKUnit.gram()
             case "Fat":
                 return HKUnit.gram()
-            case "Energy":
-                return HKUnit.kilocalorie()
             case "Saturated fat":
                 return HKUnit.gram()
             case "Cholesterol":

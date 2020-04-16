@@ -133,6 +133,8 @@ extension HKUnit {
                 return HKUnit.gramUnit(with: .kilo)
             case "distance":
                 return HKUnit.meter()
+            case "energy":
+                return HKUnit.kilocalorie()
             case "Energy":
                 return HKUnit.kilocalorie()
             case "Water":

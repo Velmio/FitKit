@@ -104,7 +104,7 @@ class FitKit {
       case DataType.ENERGY:
         return "energy";
       case DataType.WATER:
-        return "water";
+        return "Water";
       case DataType.SLEEP:
         return "sleep";
       case DataType.CARBOHYDRATE:

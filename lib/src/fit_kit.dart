@@ -139,6 +139,8 @@ class FitKit {
         return "Vitamin D";
       case DataType.VITAMIN_C:
         return "Vitamin C";
+      case DataType.DIETARY_ENERGY:
+        return "Energy";
     }
     throw Exception('dataType $type not supported');
   }
@@ -161,6 +163,7 @@ enum DataType {
   EXERCISE_TIME,
   CARBOHYDRATE,
   PROTEIN,
+  DIETARY_ENERGY,
   FAT,
   SATURATED_FAT,
   CHOLESTEROL,

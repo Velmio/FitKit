@@ -62,7 +62,7 @@ extension HKSampleType {
                 return HKSampleType.quantityType(forIdentifier: .distanceWalkingRunning)
             case "energy":
                 return HKSampleType.quantityType(forIdentifier: .activeEnergyBurned)
-            case "water":
+            case "Water":
                 if #available(iOS 9, *) {
                     return HKSampleType.quantityType(forIdentifier: .dietaryWater)
                 } else {
@@ -101,13 +101,6 @@ extension HKSampleType {
                 return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryVitaminC)
             case "Vitamin D":
                 return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryVitaminD)
-            case "Water":
-                if #available(iOS 9.0, *) {
-                           return  HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryWater)
-                } else {
-                           // Fallback on earlier versions
-                    return nil
-             }
             default:
                 return nil
             }
@@ -142,7 +135,7 @@ extension HKUnit {
                 return HKUnit.meter()
             case "energy":
                 return HKUnit.kilocalorie()
-            case "water":
+            case "Water":
                 return HKUnit.liter()
             case "sleep":
                 return HKUnit.minute() // this is ignored
@@ -181,13 +174,6 @@ extension HKUnit {
                 return HKUnit.gramUnit(with: .micro)
             case "Vitamin D":
                 return HKUnit.gramUnit(with: .micro)
-            case "Water":
-                if #available(iOS 9.0, *) {
-                    return HKUnit.liter()
-                } else {
-                    // Fallback on earlier versions
-                    return nil
-                }
                 
             default:
                 return nil

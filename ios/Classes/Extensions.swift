@@ -70,12 +70,44 @@ extension HKSampleType {
                 }
             case "sleep":
                 return HKSampleType.categoryType(forIdentifier: .sleepAnalysis)
-            case "carbohydrates":
+            //Nutrition Data
+            case "Carbohydrate":
                 return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryCarbohydrates)
-            case "protein":
+            case "Protein":
                 return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryProtein)
-            case "total_fat":
+            case "Fat":
                 return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryFatTotal)
+            case "Energy":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryEnergyConsumed)
+            case "Saturated fat":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryFatSaturated)
+            case "Cholesterol":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryCholesterol)
+            case "Fiber":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryFiber)
+            case "Sugar":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietarySugar)
+            case "Calcium, Ca":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryCalcium)
+            case "Iron, Fe":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryIron)
+            case "Potassium, K":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryPotassium)
+            case "Sodium, Na":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietarySodium)
+            case "Vitamin A":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryVitaminA)
+            case "Vitamin C":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryVitaminC)
+            case "Vitamin D":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryVitaminD)
+            case "Water":
+                if #available(iOS 9.0, *) {
+                           return  HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryWater)
+                } else {
+                           // Fallback on earlier versions
+                    return nil
+             }
             default:
                 return nil
             }
@@ -112,23 +144,56 @@ extension HKUnit {
                 return HKUnit.kilocalorie()
             case "water":
                 return HKUnit.liter()
-            case "carbohydrates":
-                return HKUnit.gram()
-            case "protein":
-                return HKUnit.gram()
-            case "total_fat":
-                return HKUnit.gram()
             case "sleep":
                 return HKUnit.minute() // this is ignored
             case "stand_time":
                 return HKUnit.minute()
             case "exercise_time":
                 return HKUnit.minute()
+            //Nutrition
+            case "Carbohydrate":
+                return HKUnit.gram()
+            case "Protein":
+                return HKUnit.gram()
+            case "Fat":
+                return HKUnit.gram()
+            case "Energy":
+                return HKUnit.kilocalorie()
+            case "Saturated fat":
+                return HKUnit.gram()
+            case "Cholesterol":
+                return HKUnit.gramUnit(with: .milli)
+            case "Fiber":
+                return HKUnit.gram()
+            case "Sugar":
+                return HKUnit.gram()
+            case "Calcium, Ca":
+                return HKUnit.gramUnit(with: .milli)
+            case "Iron, Fe":
+                return HKUnit.gramUnit(with: .milli)
+            case "Potassium, K":
+                return HKUnit.gramUnit(with: .milli)
+            case "Sodium, Na":
+                return HKUnit.gramUnit(with: .milli)
+            case "Vitamin A":
+                return HKUnit.gramUnit(with: .micro)
+            case "Vitamin C":
+                return HKUnit.gramUnit(with: .micro)
+            case "Vitamin D":
+                return HKUnit.gramUnit(with: .micro)
+            case "Water":
+                if #available(iOS 9.0, *) {
+                    return HKUnit.liter()
+                } else {
+                    // Fallback on earlier versions
+                    return nil
+                }
+                
             default:
                 return nil
             }
-        }() else {
-            throw "type \"\(type)\" is not supported";
+            }() else {
+                throw "type \"\(type)\" is not supported";
         }
         return unit
     }
@@ -138,15 +203,15 @@ extension HKStatisticsOptions {
     public static func fromDartAggregationOption(aggregateOption: String) throws -> HKStatisticsOptions {
         guard let option: HKStatisticsOptions = {
             switch (aggregateOption) {
-                case "cumulativeSum":
-                    return HKStatisticsOptions.cumulativeSum
-                case "discreteAverage":
-                    return HKStatisticsOptions.discreteAverage
-                default:
-                    return nil
+            case "cumulativeSum":
+                return HKStatisticsOptions.cumulativeSum
+            case "discreteAverage":
+                return HKStatisticsOptions.discreteAverage
+            default:
+                return nil
             }
-        } () else {
-            throw "type \"\(aggregateOption)\" is not supported";
+            } () else {
+                throw "type \"\(aggregateOption)\" is not supported";
         }
         return option
     }

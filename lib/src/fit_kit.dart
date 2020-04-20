@@ -141,12 +141,35 @@ class FitKit {
         return "Vitamin C";
       case DataType.DIETARY_ENERGY:
         return "Energy";
+       case DataType.FOLATE:
+        return "Folate";
+      case DataType.FOLIC_ACID:
+        return "Folate acid";
+      case DataType.THIAMIN:
+        return "Thiamin (Vitamin B1)";
+      case DataType.RIBOFLAVIN:
+        return "Riboflavin (Vitamin B2)";
+      case DataType.NIACIN:
+        return "Niacin (Vitamin B3)";
+      case DataType.VITAMIN_B6:
+        return "Vitamin B6";
+      case DataType.VITAMIN_B12:
+        return "Vitamin B12";
+      case DataType.VITAMIN_E:
+        return "Vitamin E";
+      case DataType.ZINC:
+        return "Zinc, Zn";
+      case DataType.RETINOL:
+        return "Retinol (Vitamin A1)";
+      case DataType.MAGNESIUM:
+        return "Magnesium, Mg";
     }
     throw Exception('dataType $type not supported');
   }
 }
 
 enum DataType {
+
   HEART_RATE,
   RESTING_HEART_RATE,
   IRREGULAR_HEART_RHYTHM_EVENT,
@@ -175,7 +198,18 @@ enum DataType {
   SODIUM,
   VITAMIN_A,
   VITAMIN_D,
-  VITAMIN_C
+  VITAMIN_C,
+  FOLATE,
+  FOLIC_ACID,
+  THIAMIN,
+  RIBOFLAVIN,
+  NIACIN,
+  VITAMIN_B6,
+  VITAMIN_B12,
+  VITAMIN_E,
+  ZINC,
+  RETINOL,
+  MAGNESIUM
 
 }
 

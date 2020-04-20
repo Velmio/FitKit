@@ -101,6 +101,28 @@ extension HKSampleType {
                 return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryVitaminC)
             case "Vitamin D":
                 return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryVitaminD)
+            case "Folate":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryFolate)!
+            case "Folic acid":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryFolate)!
+            case "Thiamin (Vitamin B1)":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryThiamin)!
+            case "Riboflavin (Vitamin B2)":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryRiboflavin)!
+            case "Niacin (Vitamin B3)":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryNiacin)!
+            case "Vitamin B6":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryVitaminB6)!
+            case "Vitamin B12":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryVitaminB12)!
+            case "Vitamin E":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryVitaminE)!
+            case "Zinc, Zn":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryZinc)!
+            case "Retinol (Vitamin A1)":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryVitaminA)!
+            case "Magnesium, Mg":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryMagnesium)!
             default:
                 return nil
             }
@@ -174,6 +196,28 @@ extension HKUnit {
                 return HKUnit.gramUnit(with: .micro)
             case "Vitamin D":
                 return HKUnit.gramUnit(with: .micro)
+            case "Folate":
+                return HKUnit.gramUnit(with: .micro)
+            case "Folic acid":
+                return HKUnit.gramUnit(with: .micro)
+            case "Thiamin (Vitamin B1)":
+                return HKUnit.gramUnit(with: .milli)
+            case "Riboflavin (Vitamin B2)":
+                return HKUnit.gramUnit(with: .milli)
+            case "Niacin (Vitamin B3)":
+                return HKUnit.gramUnit(with: .milli)
+            case "Vitamin B6":
+                return HKUnit.gramUnit(with: .milli)
+            case "Vitamin B12":
+                return HKUnit.gramUnit(with: .micro)
+            case "Vitamin E":
+                return HKUnit.gramUnit(with: .milli)
+            case "Zinc, Zn":
+                return HKUnit.gramUnit(with: .milli)
+            case "Retinol (Vitamin A1)":
+                return HKUnit.gramUnit(with: .micro)
+            case "Magnesium, Mg":
+                return HKUnit.gramUnit(with: .milli)
                 
             default:
                 return nil

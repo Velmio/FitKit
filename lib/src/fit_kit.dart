@@ -144,7 +144,7 @@ class FitKit {
        case DataType.FOLATE:
         return "Folate";
       case DataType.FOLIC_ACID:
-        return "Folate acid";
+        return "Folic acid";
       case DataType.THIAMIN:
         return "Thiamin (Vitamin B1)";
       case DataType.RIBOFLAVIN:

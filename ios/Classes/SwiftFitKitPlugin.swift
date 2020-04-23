@@ -36,6 +36,9 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
             } else if (call.method == "read") {
                 let request = try ReadRequest.fromCall(call: call)
                 read(request: request, result: result)
+            } else if (call.method == "readSleep") {
+                let request = try ReadRequest.fromCall(call: call)
+                readSleep(request: request, result: result)
             } else if (call.method == "computeCollectionQuery") {
                 let request = try CollectionQueryRequest.fromCall(call: call)
                 performCollectionQuery(request: request, result: result)
@@ -114,6 +117,17 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
             self.readSample(request: request, result: result)
         }
     }
+    
+    private func readSleep(request: ReadRequest, result: @escaping FlutterResult) {
+        requestAuthorization(sampleTypes: [request.sampleType]) { success, error in
+            guard success else {
+                result(error)
+                return
+            }
+
+            self.readSleepSample(request: request, result: result)
+        }
+    }
 
     private func requestAuthorization(sampleTypes: Array<HKSampleType>, completion: @escaping (Bool, FlutterError?) -> Void) {
         healthStore!.requestAuthorization(toShare: nil, read: Set(sampleTypes)) { (success, error) in
@@ -124,6 +138,39 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
 
             completion(true, nil)
         }
+    }
+    
+    private func readSleepSample(request: ReadRequest, result: @escaping FlutterResult) {
+        print("readSleepSample: \(request.type)")
+
+        let predicate = HKQuery.predicateForSamples(withStart: request.dateFrom, end: request.dateTo, options: .strictEndDate)
+        let sortDescriptor = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: request.limit == nil)
+
+        let query = HKSampleQuery(sampleType: request.sampleType, predicate: predicate, limit: request.limit ?? HKObjectQueryNoLimit, sortDescriptors: [sortDescriptor]) {
+            _, samplesOrNil, error in
+
+            guard var samples = samplesOrNil else {
+                result(FlutterError(code: self.TAG, message: "Results are null", details: error))
+                return
+            }
+
+            if (request.limit != nil) {
+                // if limit is used sort back to ascending
+                samples = samples.sorted(by: { $0.startDate.compare($1.startDate) == .orderedAscending })
+            }
+
+            print(samples)
+            result(samples.map { sample -> NSDictionary in
+                [
+                    "value": self.readValue(sample: sample, unit: request.unit),
+                    "date_from": Int(sample.startDate.timeIntervalSince1970 * 1000),
+                    "date_to": Int(sample.endDate.timeIntervalSince1970 * 1000),
+                    "source": self.readSource(sample: sample),
+                    "user_entered": sample.metadata?[HKMetadataKeyWasUserEntered] as? Bool == true
+                ]
+            })
+        }
+        healthStore!.execute(query)
     }
 
     private func readSample(request: ReadRequest, result: @escaping FlutterResult) {
@@ -158,6 +205,7 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
         }
         healthStore!.execute(query)
     }
+    
     
     func performCollectionQuery(request: CollectionQueryRequest, result: @escaping FlutterResult) {
 

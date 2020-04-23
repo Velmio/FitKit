@@ -43,6 +43,23 @@ class FitKit {
     );
   }
 
+ //Modified method for sleep
+  static Future<List<FitData>> readSleep(
+    DataType type, {
+    DateTime dateFrom,
+    DateTime dateTo,
+    int limit,
+  }) async {
+    return await _channel.invokeListMethod('readSleep', {
+      "type": _dataTypeToString(type),
+      "date_from": dateFrom?.millisecondsSinceEpoch ?? 1,
+      "date_to": (dateTo ?? DateTime.now()).millisecondsSinceEpoch,
+      "limit": limit,
+    }).then(
+      (response) => response.map((item) => FitData.fromJson(item)).toList(),
+    );
+  }
+
   static Future<List<FitData>> computeCollectionQuery(
       DataType type,
       {
@@ -141,7 +158,7 @@ class FitKit {
         return "Vitamin C";
       case DataType.DIETARY_ENERGY:
         return "Energy";
-       case DataType.FOLATE:
+      case DataType.FOLATE:
         return "Folate";
       case DataType.FOLIC_ACID:
         return "Folate acid";

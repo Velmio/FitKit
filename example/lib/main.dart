@@ -67,6 +67,31 @@ class _MyAppState extends State<MyApp> {
     setState(() {});
   }
 
+
+  //TEST SOURCES
+  // Future<void> getSleepSources() async {
+  //   results.clear();
+
+  //   try {
+  //     permissions = await FitKit.requestPermissions(DataType.values);
+  //     if (!permissions) {
+  //       result = 'requestPermissions: failed';
+  //     } else {
+
+  //         var results = await FitKit.getSources(
+  //           DataType.SLEEP,
+  //         );
+        
+
+  //       result = 'Collection Results: $results';
+  //     }
+  //   } catch (e) {
+  //     result = 'readAll: $e';
+  //   }
+
+  //   setState(() {});
+  // }
+
    Future<void> computeCollectionQueryTest() async {
     results.clear();
 

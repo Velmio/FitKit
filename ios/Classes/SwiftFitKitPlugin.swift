@@ -39,7 +39,11 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
             } else if (call.method == "readSleep") {
                 let request = try ReadRequest.fromCall(call: call)
                 readSleep(request: request, result: result)
-            } else if (call.method == "computeCollectionQuery") {
+            } else if (call.method == "getSources") {
+                let request = try SourceRequest.fromCall(call: call)
+                getSources(request: request, result: result)
+            }
+            else if (call.method == "computeCollectionQuery") {
                 let request = try CollectionQueryRequest.fromCall(call: call)
                 performCollectionQuery(request: request, result: result)
             } else {
@@ -128,6 +132,8 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
             self.readSleepSample(request: request, result: result)
         }
     }
+    
+
 
     private func requestAuthorization(sampleTypes: Array<HKSampleType>, completion: @escaping (Bool, FlutterError?) -> Void) {
         healthStore!.requestAuthorization(toShare: nil, read: Set(sampleTypes)) { (success, error) in
@@ -139,6 +145,32 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
             completion(true, nil)
         }
     }
+    
+    private func getSources(request: SourceRequest, result: @escaping FlutterResult) {
+         
+        let query = HKSourceQuery.init(sampleType: request.sampleType,
+                                         samplePredicate: nil) { (query, sources, error) in
+                                         
+                                            if (sources != nil || sources?.count != 0) {
+                                                
+                                                var output: [String] = []
+                                                for source in sources! {
+                                                    print(source.name)
+                                                    output.append(source.name)
+                                                }
+                                                
+                                                result(output)
+                                                
+                                            } else {
+                                                 result(FlutterError(code: self.TAG, message: "No soruces found", details: "Error occured"))
+                                            }
+                                         
+          }
+        
+
+          healthStore!.execute(query)
+      }
+
     
     private func readSleepSample(request: ReadRequest, result: @escaping FlutterResult) {
         print("readSleepSample: \(request.type)")

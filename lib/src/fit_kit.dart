@@ -43,6 +43,16 @@ class FitKit {
     );
   }
 
+  //Get the list of sources for a datatype
+  static Future<List<String>> getSources(
+    DataType type) async {
+    return await _channel.invokeListMethod('getSources', {
+      "type": _dataTypeToString(type),
+    }).then(
+      (response) => response.map((item) => item.toString()).toList(),
+    );
+  }
+
  //Modified method for sleep
   static Future<List<FitData>> readSleep(
     DataType type, {

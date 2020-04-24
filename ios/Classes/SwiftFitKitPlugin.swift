@@ -282,6 +282,8 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
                                                 value = result.sumQuantity()?.doubleValue(for: request.unit) ?? 0;
                                             case "discreteAverage":
                                                 value = result.averageQuantity()?.doubleValue(for: request.unit) ?? 0;
+                                            case "discreteMax":
+                                                value = result.maximumQuantity()?.doubleValue(for: request.unit) ?? 0;
                                             default:
                                                 value = -1
                                             }

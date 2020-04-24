@@ -237,6 +237,8 @@ extension HKStatisticsOptions {
                 return HKStatisticsOptions.cumulativeSum
             case "discreteAverage":
                 return HKStatisticsOptions.discreteAverage
+            case "discreteMax":
+                return HKStatisticsOptions.discreteMax
             default:
                 return nil
             }

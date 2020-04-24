@@ -69,28 +69,28 @@ class _MyAppState extends State<MyApp> {
 
 
   //TEST SOURCES
-  // Future<void> getSleepSources() async {
-  //   results.clear();
+  Future<void> getSleepSources() async {
+    results.clear();
 
-  //   try {
-  //     permissions = await FitKit.requestPermissions(DataType.values);
-  //     if (!permissions) {
-  //       result = 'requestPermissions: failed';
-  //     } else {
+    try {
+      permissions = await FitKit.requestPermissions(DataType.values);
+      if (!permissions) {
+        result = 'requestPermissions: failed';
+      } else {
 
-  //         var results = await FitKit.getSources(
-  //           DataType.SLEEP,
-  //         );
+          var results = await FitKit.getSources(
+            DataType.SLEEP,
+          );
         
 
-  //       result = 'Collection Results: $results';
-  //     }
-  //   } catch (e) {
-  //     result = 'readAll: $e';
-  //   }
+        result = 'Collection Results: $results';
+      }
+    } catch (e) {
+      result = 'readAll: $e';
+    }
 
-  //   setState(() {});
-  // }
+    setState(() {});
+  }
 
    Future<void> computeCollectionQueryTest() async {
     results.clear();
@@ -256,7 +256,7 @@ class _MyAppState extends State<MyApp> {
           child: FlatButton(
             color: Theme.of(context).accentColor,
             textColor: Colors.white,
-            onPressed: () => computeCollectionQueryTest(),
+            onPressed: () => getSleepSources(),
             child: Text('Compute'),
           ),
         ),

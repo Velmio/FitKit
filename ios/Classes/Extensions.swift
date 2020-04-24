@@ -16,6 +16,8 @@ extension HKSampleType {
             switch type {
             case "heart_rate":
                 return HKSampleType.quantityType(forIdentifier: .heartRate)
+             case "max_heart_rate":
+                return HKSampleType.quantityType(forIdentifier: .heartRate)
              case "resting_heart_rate":
                 if #available(iOS 11.0, *) {
                  return HKSampleType.quantityType(forIdentifier: .restingHeartRate)
@@ -138,6 +140,8 @@ extension HKUnit {
         guard let unit: HKUnit = {
             switch (type) {
             case "heart_rate":
+                return HKUnit.init(from: "count/min")
+            case "max_heart_rate":
                 return HKUnit.init(from: "count/min")
             case "resting_heart_rate":
                 return HKUnit.init(from: "count/min")

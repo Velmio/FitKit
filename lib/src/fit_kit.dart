@@ -104,6 +104,8 @@ class FitKit {
         return "cumulativeSum";
       case CollectionOptions.DISCRETE_AVERAGE:
         return "discreteAverage";
+      case CollectionOptions.DISCRETE_MAX:
+        return "discreteMax";
     }
     throw Exception('CollectionOptions $option not supported');
   }
@@ -112,6 +114,8 @@ class FitKit {
     switch (type) {
       case DataType.HEART_RATE:
         return "heart_rate";
+      case DataType.MAX_HEART_RATE:
+        return "max_heart_rate";
       case DataType.RESTING_HEART_RATE:
         return "resting_heart_rate";
       case DataType.IRREGULAR_HEART_RHYTHM_EVENT:
@@ -198,6 +202,7 @@ class FitKit {
 enum DataType {
 
   HEART_RATE,
+  MAX_HEART_RATE,
   RESTING_HEART_RATE,
   IRREGULAR_HEART_RHYTHM_EVENT,
   HIGH_HEART_RATE_EVENT,
@@ -242,5 +247,6 @@ enum DataType {
 
 enum CollectionOptions {
   CUMULATIVE_SUM,
-  DISCRETE_AVERAGE
+  DISCRETE_AVERAGE,
+  DISCRETE_MAX,
 }

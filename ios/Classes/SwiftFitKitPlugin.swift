@@ -246,7 +246,10 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
         interval.minute = request.interval ?? 1 //Defaults to 1 minute interval
         
         let calendar = Calendar.current
-        let anchorDate = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: Date())!
+        var dayComponent = DateComponents()
+        dayComponent.day  = 1 // For removing one day (yesterday): -1
+        let nextDate = calendar.date(byAdding: dayComponent, to: Date())!
+        let anchorDate = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: nextDate)!
         
         let predicate = HKQuery.predicateForSamples(withStart: request.dateFrom
             , end: request.dateTo, options: .strictStartDate)

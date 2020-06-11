@@ -194,6 +194,8 @@ class FitKit {
         return "Retinol (Vitamin A1)";
       case DataType.MAGNESIUM:
         return "Magnesium, Mg";
+      case DataType.CAFFEINE:
+        return  "Caffeine";
     }
     throw Exception('dataType $type not supported');
   }
@@ -241,7 +243,8 @@ enum DataType {
   VITAMIN_E,
   ZINC,
   RETINOL,
-  MAGNESIUM
+  MAGNESIUM,
+  CAFFEINE
 
 }
 

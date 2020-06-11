@@ -125,6 +125,8 @@ extension HKSampleType {
                 return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryVitaminA)!
             case "Magnesium, Mg":
                 return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryMagnesium)!
+            case "Caffeine":
+                return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryCaffeine)!
             default:
                 return nil
             }
@@ -221,6 +223,8 @@ extension HKUnit {
             case "Retinol (Vitamin A1)":
                 return HKUnit.gramUnit(with: .micro)
             case "Magnesium, Mg":
+                return HKUnit.gramUnit(with: .milli)
+            case "Caffeine":
                 return HKUnit.gramUnit(with: .milli)
                 
             default:

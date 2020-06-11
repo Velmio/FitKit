@@ -199,7 +199,7 @@ extension HKUnit {
             case "Vitamin A":
                 return HKUnit.gramUnit(with: .micro)
             case "Vitamin C":
-                return HKUnit.gramUnit(with: .micro)
+                return HKUnit.gramUnit(with: .milli)
             case "Vitamin D":
                 return HKUnit.gramUnit(with: .micro)
             case "Folate":

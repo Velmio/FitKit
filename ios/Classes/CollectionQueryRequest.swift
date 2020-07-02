@@ -5,15 +5,15 @@
 import HealthKit
 
 public class CollectionQueryRequest {
-    let type: String
-    let sampleType: HKSampleType
-    let unit: HKUnit
-    let dateFrom: Date
-    let dateTo: Date
-    let limit: Int?
-    let aggregationOption: String
-    let option: HKStatisticsOptions
-    let interval: Int? //minutes
+    public let type: String
+    public let sampleType: HKSampleType
+    public let unit: HKUnit
+    public let dateFrom: Date
+    public let dateTo: Date
+    public let limit: Int?
+    public let aggregationOption: String
+    public let option: HKStatisticsOptions
+    public let interval: Int? //minutes
 
     public init(type: String, sampleType: HKSampleType, unit: HKUnit, dateFrom: Date, dateTo: Date, limit: Int?, aggregationOption: String, option: HKStatisticsOptions, interval: Int?) {
         self.type = type;

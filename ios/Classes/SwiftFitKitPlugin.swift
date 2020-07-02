@@ -310,6 +310,80 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
         
         healthStore!.execute(query)
     }
+    
+    //Used for background execution
+    public func performHeadlessCollectionQuery(request: CollectionQueryRequest, completionHandler: @escaping ([NSDictionary]) -> Void ) {
+
+        
+        var interval = DateComponents()
+        interval.minute = request.interval ?? 1 //Defaults to 1 minute interval
+        
+        let calendar = Calendar.current
+        var dayComponent = DateComponents()
+        dayComponent.day  = 1 // For removing one day (yesterday): -1
+        let nextDate = calendar.date(byAdding: dayComponent, to: Date())!
+        let anchorDate = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: nextDate)!
+        
+        let predicate = HKQuery.predicateForSamples(withStart: request.dateFrom
+            , end: request.dateTo, options: .strictStartDate)
+        
+        
+        guard let type = request.sampleType as? HKQuantityType else {
+            print("Not supported")
+            completionHandler([])
+            return
+        }
+        
+                
+        let query = HKStatisticsCollectionQuery.init(quantityType: type,
+                                                     quantitySamplePredicate: predicate,
+                                                     options: request.option,
+                                                     anchorDate: anchorDate,
+                                                     intervalComponents: interval)
+        
+        
+        query.initialResultsHandler = {
+            query, results, error in
+            
+            //let startDate = calendar.startOfDay(for: Date())
+            
+            var output: [NSDictionary] = [NSDictionary]()
+            
+            results?.enumerateStatistics(from: request.dateFrom,
+                                         to: request.dateTo, with: { (result, stop) in
+                                                                                        
+                                            var value: Double
+                                            
+                                            switch (request.aggregationOption) {
+                                            case "cumulativeSum":
+                                                value = result.sumQuantity()?.doubleValue(for: request.unit) ?? 0;
+                                            case "discreteAverage":
+                                                value = result.averageQuantity()?.doubleValue(for: request.unit) ?? 0;
+                                            case "discreteMax":
+                                                value = result.maximumQuantity()?.doubleValue(for: request.unit) ?? 0;
+                                            default:
+                                                value = -1
+                                            }
+                                            
+                                            let sample: NSDictionary =  [
+                                                "value": value,
+                                                "date_from" : Int(result.startDate.timeIntervalSince1970 * 1000),
+                                                "date_to": Int(result.endDate.timeIntervalSince1970 * 1000),
+                                                "source": "Collection Query",
+                                                "user_entered": false
+                                            ]
+                                            
+                                            if (value != 0) {
+                                                output.append(sample)
+                                            }
+                                            
+            })
+            
+            completionHandler(output)
+        }
+        
+        healthStore!.execute(query)
+    }
 
     private func readValue(sample: HKSample, unit: HKUnit) -> Any {
         if let sample = sample as? HKQuantitySample {

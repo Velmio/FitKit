@@ -4,7 +4,7 @@
 
 import HealthKit
 
-class CollectionQueryRequest {
+public class CollectionQueryRequest {
     let type: String
     let sampleType: HKSampleType
     let unit: HKUnit
@@ -15,7 +15,7 @@ class CollectionQueryRequest {
     let option: HKStatisticsOptions
     let interval: Int? //minutes
 
-    private init(type: String, sampleType: HKSampleType, unit: HKUnit, dateFrom: Date, dateTo: Date, limit: Int?, aggregationOption: String, option: HKStatisticsOptions, interval: Int?) {
+    public init(type: String, sampleType: HKSampleType, unit: HKUnit, dateFrom: Date, dateTo: Date, limit: Int?, aggregationOption: String, option: HKStatisticsOptions, interval: Int?) {
         self.type = type;
         self.sampleType = sampleType
         self.unit = unit

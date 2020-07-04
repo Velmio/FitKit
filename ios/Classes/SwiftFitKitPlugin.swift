@@ -249,7 +249,10 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
         var dayComponent = DateComponents()
         dayComponent.day  = 1 // For removing one day (yesterday): -1
         let nextDate = calendar.date(byAdding: dayComponent, to: Date())!
-        let anchorDate = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: nextDate)!
+        //let anchorDate = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: nextDate)!
+        
+        //Test
+        let anchorDate = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: request.dateTo)!
         
         let predicate = HKQuery.predicateForSamples(withStart: request.dateFrom
             , end: request.dateTo, options: .strictStartDate)
@@ -310,6 +313,8 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
         
         healthStore!.execute(query)
     }
+    
+    
     
     //Used for background execution
     public func performHeadlessCollectionQuery(request: CollectionQueryRequest, completionHandler: @escaping ([NSDictionary]) -> Void ) {

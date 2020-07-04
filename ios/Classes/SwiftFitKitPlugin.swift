@@ -248,26 +248,13 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
         let calendar = Calendar.current
         var dayComponent = DateComponents()
         dayComponent.day  = 1 // For removing one day (yesterday): -1
-        //let nextDate = calendar.date(byAdding: dayComponent, to: Date())!
-        //let anchorDate = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: nextDate)!
-        
-        //Test
-        //let nextDate = calendar.date(byAdding: dayComponent, to: request.dateTo)!
-        //let anchorDate = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: nextDate)!
-        
-        let anchorDate = request.dateTo
+        let nextDate = calendar.date(byAdding: dayComponent, to: request.dateTo)!
+        let anchorDate = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: nextDate)!
         
         let predicate = HKQuery.predicateForSamples(withStart: request.dateFrom
             , end: request.dateTo, options: .strictStartDate)
         
-//        dayComponent.day  = -1
-//        let oneDayBeforeStart = calendar.date(byAdding: dayComponent, to: request.dateFrom)!
-//        let flexyStart = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: oneDayBeforeStart)!
-        
-//        let predicate = HKQuery.predicateForSamples(withStart: flexyStart
-//        , end: anchorDate, options: .strictStartDate)
-        
-        
+                
         guard let type = request.sampleType as? HKQuantityType else {
             result(FlutterError(code: TAG, message: "Not supported", details: nil))
             return
@@ -283,9 +270,7 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
         
         query.initialResultsHandler = {
             query, results, error in
-            
-            //let startDate = calendar.startOfDay(for: Date())
-            
+                        
             var output: [NSDictionary] = [NSDictionary]()
             
             results?.enumerateStatistics(from: request.dateFrom,

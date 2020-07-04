@@ -255,8 +255,15 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
         let nextDate = calendar.date(byAdding: dayComponent, to: request.dateTo)!
         let anchorDate = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: nextDate)!
         
-        let predicate = HKQuery.predicateForSamples(withStart: request.dateFrom
-            , end: request.dateTo, options: .strictStartDate)
+//        let predicate = HKQuery.predicateForSamples(withStart: request.dateFrom
+//            , end: request.dateTo, options: .strictStartDate)
+        
+        dayComponent.day  = -1
+        let oneDayBeforeStart = calendar.date(byAdding: dayComponent, to: request.dateFrom)!
+        let flexyStart = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: oneDayBeforeStart)!
+        
+        let predicate = HKQuery.predicateForSamples(withStart: flexyStart
+        , end: anchorDate, options: .strictStartDate)
         
         
         guard let type = request.sampleType as? HKQuantityType else {

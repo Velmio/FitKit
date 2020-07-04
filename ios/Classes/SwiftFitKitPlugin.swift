@@ -252,8 +252,10 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
         //let anchorDate = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: nextDate)!
         
         //Test
-        let nextDate = calendar.date(byAdding: dayComponent, to: request.dateTo)!
-        let anchorDate = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: nextDate)!
+        //let nextDate = calendar.date(byAdding: dayComponent, to: request.dateTo)!
+        //let anchorDate = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: nextDate)!
+        
+        let anchorDate = request.dateTo
         
         let predicate = HKQuery.predicateForSamples(withStart: request.dateFrom
             , end: request.dateTo, options: .strictStartDate)

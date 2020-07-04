@@ -248,11 +248,12 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
         let calendar = Calendar.current
         var dayComponent = DateComponents()
         dayComponent.day  = 1 // For removing one day (yesterday): -1
-        let nextDate = calendar.date(byAdding: dayComponent, to: Date())!
+        //let nextDate = calendar.date(byAdding: dayComponent, to: Date())!
         //let anchorDate = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: nextDate)!
         
         //Test
-        let anchorDate = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: request.dateTo)!
+        let nextDate = calendar.date(byAdding: dayComponent, to: request.dateTo)!
+        let anchorDate = calendar.date(bySettingHour: 0, minute: 0, second: 0, of: nextDate)!
         
         let predicate = HKQuery.predicateForSamples(withStart: request.dateFrom
             , end: request.dateTo, options: .strictStartDate)

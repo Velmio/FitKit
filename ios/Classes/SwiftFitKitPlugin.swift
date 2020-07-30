@@ -168,7 +168,7 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
           }
         
 
-          healthStore!.execute(query)
+        self.healthStore?.execute(query)
       }
 
     
@@ -202,7 +202,8 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
                 ]
             })
         }
-        healthStore!.execute(query)
+        
+        self.healthStore?.execute(query)
     }
 
     private func readSample(request: ReadRequest, result: @escaping FlutterResult) {
@@ -235,7 +236,7 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
                 ]
             })
         }
-        healthStore!.execute(query)
+        healthStore?.execute(query)
     }
     
     
@@ -306,7 +307,7 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
             result(output)
         }
         
-        healthStore!.execute(query)
+        healthStore?.execute(query)
     }
     
     
@@ -382,7 +383,7 @@ public class SwiftFitKitPlugin: NSObject, FlutterPlugin {
             completionHandler(output)
         }
         
-        healthStore!.execute(query)
+        healthStore?.execute(query)
     }
 
     private func readValue(sample: HKSample, unit: HKUnit) -> Any {

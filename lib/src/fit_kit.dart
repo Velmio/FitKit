@@ -44,8 +44,7 @@ class FitKit {
   }
 
   //Get the list of sources for a datatype
-  static Future<List<String>> getSources(
-    DataType type) async {
+  static Future<List<String>> getSources(DataType type) async {
     return await _channel.invokeListMethod('getSources', {
       "type": _dataTypeToString(type),
     }).then(
@@ -53,7 +52,7 @@ class FitKit {
     );
   }
 
- //Modified method for sleep
+  //Modified method for sleep
   static Future<List<FitData>> readSleep(
     DataType type, {
     DateTime dateFrom,
@@ -70,27 +69,23 @@ class FitKit {
     );
   }
 
-  static Future<List<FitData>> computeCollectionQuery(
-      DataType type,
-      {
-      DateTime dateFrom,
+  static Future<List<FitData>> computeCollectionQuery(DataType type,
+      {DateTime dateFrom,
       DateTime dateTo,
       int limit,
       CollectionOptions aggregationOption,
-      int interval
-      }) async {
-
-      return await _channel.invokeListMethod('computeCollectionQuery', {
+      int interval}) async {
+    return await _channel.invokeListMethod('computeCollectionQuery', {
       "type": _dataTypeToString(type),
       "date_from": dateFrom?.millisecondsSinceEpoch ?? 1,
       "date_to": (dateTo ?? DateTime.now()).millisecondsSinceEpoch,
       "limit": limit,
-      "aggregationOption": _optionTypeToString(aggregationOption) ?? _optionTypeToString(CollectionOptions.CUMULATIVE_SUM),
+      "aggregationOption": _optionTypeToString(aggregationOption) ??
+          _optionTypeToString(CollectionOptions.CUMULATIVE_SUM),
       "interval": interval
     }).then(
       (response) => response.map((item) => FitData.fromJson(item)).toList(),
     );
-  
   }
 
   static Future<FitData> readLast(DataType type) async {
@@ -98,8 +93,8 @@ class FitKit {
         .then((results) => results.isEmpty ? null : results[0]);
   }
 
-  static String _optionTypeToString(CollectionOptions option){
-    switch (option){
+  static String _optionTypeToString(CollectionOptions option) {
+    switch (option) {
       case CollectionOptions.CUMULATIVE_SUM:
         return "cumulativeSum";
       case CollectionOptions.DISCRETE_AVERAGE:
@@ -195,14 +190,17 @@ class FitKit {
       case DataType.MAGNESIUM:
         return "Magnesium, Mg";
       case DataType.CAFFEINE:
-        return  "Caffeine";
+        return "Caffeine";
+      case DataType.VO2MAX:
+        return "VO2Max";
+      case DataType.BLOOD_OXYGEN:
+        return "Oxygen Saturation";
     }
     throw Exception('dataType $type not supported');
   }
 }
 
 enum DataType {
-
   HEART_RATE,
   MAX_HEART_RATE,
   RESTING_HEART_RATE,
@@ -244,8 +242,9 @@ enum DataType {
   ZINC,
   RETINOL,
   MAGNESIUM,
-  CAFFEINE
-
+  CAFFEINE,
+  VO2MAX,
+  BLOOD_OXYGEN
 }
 
 enum CollectionOptions {

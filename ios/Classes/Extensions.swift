@@ -127,6 +127,20 @@ extension HKSampleType {
                 return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryMagnesium)!
             case "Caffeine":
                 return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.dietaryCaffeine)!
+            case "VO2Max":
+                if #available(iOS 11.0, *) {
+                    return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.vo2Max)!
+                } else {
+                    // Fallback on earlier versions
+                    return nil
+                }
+            case "Oxygen Saturation":
+                if #available(iOS 13.0, *) {
+                    return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.oxygenSaturation)!
+                } else {
+                    // Fallback on earlier versions
+                    return nil
+                }
             default:
                 return nil
             }
@@ -226,7 +240,10 @@ extension HKUnit {
                 return HKUnit.gramUnit(with: .milli)
             case "Caffeine":
                 return HKUnit.gramUnit(with: .milli)
-                
+            case "VO2Max":
+                return HKUnit(from: "ml/kg*min")
+            case "Oxygen Saturation":
+                return HKUnit.percent()
             default:
                 return nil
             }

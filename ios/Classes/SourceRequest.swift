@@ -21,8 +21,12 @@ class SourceRequest {
               let type = arguments["type"] as? String else {
             throw "invalid call arguments \(call.arguments)";
         }
-
-        let sampleType = try HKSampleType.fromDartType(type: type)
+        
+        guard let values = HKSampleType.fromDartType(type: type),
+                let sampleType = values.sampleType as? HKSampleType
+                else {
+            throw UnsupportedError(message: "type \(type) is not supported");
+        }
 
         return SourceRequest(type: type, sampleType: sampleType)
     }
